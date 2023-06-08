@@ -1,0 +1,19 @@
+---
+import { Image } from '@astrojs/image/components';
+import Layout from '../layouts/default.astro';
+import NotFoundImg from '../assets/images/hungry-hamburger.png';
+---
+
+<Layout>
+  <main class="flex flex-col items-center justify-center gap-2 h-full">
+    <Image
+      src={NotFoundImg}
+      alt="404 not found"
+      width={280}
+      height={280}
+      class="object-cover"
+    />
+    <h1 class="font-bold text-4xl">Page not found</h1>
+    <a href="/">&larr; back home</a>
+  </main>
+</Layout>

@@ -1,0 +1,31 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      href="/rss.xml"
+      type="application/rss+xml"
+      title="RSS feed for astrowich"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Demo</title>
+  </head>
+  <body class="bg-[#f5f5f5]">
+    <main class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+      <Header />
+      <section class="max-w-7xl h-full px-4 mx-auto">
+        <slot />
+      </section>
+      <Footer />
+    </main>
+  </body>
+</html>
+
+<style></style>

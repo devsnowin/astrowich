@@ -1,0 +1,65 @@
+---
+import { Image } from '@astrojs/image/components';
+import Layout from '../layouts/default.astro';
+import HamburgerImg from '../assets/images/hamburger.png';
+import FoodParcelImg from '../assets/images/food-parcel.jpeg';
+import ShopItems from '../components/ShopItems.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+---
+
+<Layout>
+  <main class="w-full h-full my-8 text-left">
+    <section
+      class="px-6 py-8 flex justify-center gap-2 bg-primary text-white rounded-md"
+    >
+      <div class="flex flex-col items-start gap-4">
+        <h1 class="font-bold text-6xl md:max-w-xl">
+          All you need is a tasty sandwich.
+        </h1>
+        <p class="text-xl">
+          The world's leading sandwich connoisseus trust astrowich.
+        </p>
+        <a
+          href="/wow"
+          class="bg-white text-primary px-6 py-2 font-bold rounded-md">Wow!</a
+        >
+      </div>
+      <Image
+        width={300}
+        height={300}
+        src={HamburgerImg}
+        alt="doodle hamburger"
+      />
+    </section>
+    <section class="flex flex-col items-center my-6">
+      <h1 class="font-bold text-2xl">Top Astrowiches</h1>
+      <ShopItems count={3} showcase />
+      <a href="/shop" class="underline text-primary"
+        >Show all astrowiches &rarr;</a
+      >
+    </section>
+    <section
+      class="my-28 flex flex-col lg:flex-row justify-center items-center lg:items-start gap-12"
+    >
+      <Image
+        width={360}
+        height={360}
+        src={FoodParcelImg}
+        class="object-cover hidden lg:block"
+        alt="rocket ready to launch"
+      />
+      <div
+        class="flex flex-col items-center lg:items-start text-center lg:text-left gap-4"
+      >
+        <h2 class="font-bold text-4xl">Prefer your sandwich to go?</h2>
+        <p class="max-w-md">
+          Get the sandwich newsletter to hear what else qualifies as a sandwich
+          first!
+        </p>
+        <NewsletterForm />
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style></style>

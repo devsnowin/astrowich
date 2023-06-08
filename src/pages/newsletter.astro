@@ -1,0 +1,45 @@
+---
+import NewsletterForm from '../components/NewsletterForm.astro';
+import Layout from '../layouts/default.astro';
+import type { NewsLetterMsg } from '../types/index';
+
+export const prerender = false;
+
+let message;
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get('name');
+    const email = data.get('email');
+
+    // TODO: newsletter service
+
+    message = `Subcribed as "${name}" with email "${email}"`;
+  } catch (e) {
+    console.error(e);
+  }
+}
+---
+
+<Layout>
+  <main class="w-[26rem] mt-16 flex flex-col items-center gap-4">
+    <h1 class="font-bold text-4xl text-primary">
+      Get the astrowich newsletter
+    </h1>
+    <p class="">
+      Get the sandwich newsletter to hear what else qualifies as a sandwich
+      first!
+    </p>
+    <NewsletterForm message={message} />
+    <p
+      class:list={[
+        { hidden: !message },
+        'border-2 border-primary px-4 py-2 rounded-md',
+      ]}
+    >
+      {message}
+      <a href="/newsletter" class="underline text-primary">start over</a>
+    </p>
+  </main>
+</Layout>

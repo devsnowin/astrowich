@@ -1,0 +1,44 @@
+---
+import type { ShopItem } from '../types/index';
+import { formatCurrency } from '../utils/formatCurrency';
+import AddToCart from '../components/AddToCart';
+
+const results = await fetch(
+  'https://astro-frontend-masters-api.netlify.app/api/products'
+);
+
+if (!results.ok) console.error(results);
+
+const products: ShopItem[] = await results.json();
+
+interface Props {
+  count?: number;
+  showcase?: boolean;
+}
+
+const { count = Infinity, showcase = false } = Astro.props;
+---
+
+<section
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-4 my-6"
+>
+  {
+    products.slice(0, count).map((product) => (
+      <div class="max-w-xs w-full h-full bg-white flex flex-col items-start gap-2 rounded-md overflow-hidden">
+        <img
+          src={product.image.src}
+          alt={product.image.alt}
+          class="w-full h-44 object-cover"
+        />
+        <div class="w-full h-full flex flex-col items-start justify-between gap-2 py-2 px-4">
+          <h2 class="font-bold">{product.title}</h2>
+          {showcase && <p>{product.description}</p>}
+          <div class="w-full flex items-center justify-between">
+            <span>{formatCurrency(product.price)}</span>
+            {showcase ? null : <AddToCart item={product} client:only="react" />}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</section>

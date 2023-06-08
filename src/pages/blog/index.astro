@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/default.astro';
+
+const blogPosts = await getCollection('blog');
+---
+
+<Layout>
+  <section class="my-8 flex flex-col items-start gap-8">
+    <!-- <h1 class="font-bold text-4xl mt-8">Sandwich blogs</h1> -->
+    {
+      blogPosts.map((post) => (
+        <div class="post">
+          <h2 class="font-bold text-xl">
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          </h2>
+          <time datetime={post.data.date.toISOString()} class="italic text-xs">
+            {post.data.date.toDateString()}
+          </time>
+          <p class="text-sm">{post.data.description}</p>
+          <a href={`/blog/${post.slug}`}>read post</a>
+        </div>
+      ))
+    }
+    <a href="/rss.xml" class="underline">📡 subcribe to RSS feed</a>
+  </section>
+</Layout>
